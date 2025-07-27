@@ -1,0 +1,1 @@
+<img src="/static/bathstorelogo.png" alt="">

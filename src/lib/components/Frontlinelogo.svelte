@@ -1,0 +1,1 @@
+<img src="/static/frontlinelogo.png" alt="">

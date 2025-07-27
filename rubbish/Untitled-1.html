@@ -1,0 +1,763 @@
+<svelte:head>
+    <script src="https://kit.fontawesome.com/d397854d5c.js" crossorigin="anonymous"></script>
+</svelte:head>
+
+<script>
+    let term = "";
+    let products = [];
+
+    const search = (event) => {
+        if (event.code === "Enter") {
+            fetch("http://127.0.0.1:5000/search/" + term)
+                .then((response) => response.json())
+                .then((data) => (products = data.products))
+        }
+    };
+</script>
+
+<div class="container">
+
+    <!-- <header>
+    <div class="header">
+      <a href="/" class="logo">DIWhere</a>
+      <nav class="nav-links">
+        <a class="header-link" href="/">Home</a>
+        <a class="header-link" href="/">Brands</a>
+        <a class="header-link" href="/">Settings</a>
+        <a class="header-link" href="/">Trending</a>
+        <a class="header-link" href="/">Chat</a>
+      </nav>
+      <a class="header-link login" href="/login">Login here</a>
+    </div>
+  </header> -->
+
+    <main>
+        <div class="wrapper-main">
+            <h1>DIWHERE</h1>
+            <h2>Search for products anywhere!</h2>
+
+            <div class="searchbox">
+                <input type="text" placeholder="Search Here..." on:keyup={search} bind:value={term}>
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="category-title">
+                <h1>Product Categories</h1>
+            </div>
+
+            <div class="category-grid">
+                <a href="/">
+                    <div class="category-card bathroom-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Bathroom</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="bathroom.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card building-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Building & Hardware</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="building.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card wiring-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Electrics</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="lightbulb.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card furniture-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Furniture</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="furniture.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card heating-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Heating</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="heating.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card kitchen-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Kitchen</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="kitchen.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card outdoor-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Outdoor & Garden</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="outdoor.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card paint-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Paint</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="paintcan.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card plumbing-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Plumbing</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="plumbing.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card tiling-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Tiling & Flooring</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="tiling.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card timber-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Timber</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="timber.png" alt="">
+                    </div>
+                </a>
+
+                <a href="/">
+                    <div class="category-card tools-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Tools</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="toolbox.png" alt="">
+                    </div>
+                </a>
+
+                <div class="category-card blank-card">
+                    <div class="circle"></div>
+                    <div class="content">
+                        <h2>Heating</h2>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                    </div>
+                    <img src="heating.png" alt="">
+                </div>
+
+                <a href="/">
+                    <div class="category-card clearance-card">
+                        <div class="circle"></div>
+                        <div class="content">
+                            <h2>Clearance</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam harum obcaecati nulla, quod vel atque corporis ad est fuga doloribus ut ex molestiae!</p>
+                        </div>
+                        <img src="clearance.png" alt="">
+                    </div>
+                </a>
+            </div>
+
+            <div class="">
+                {#each products as product}
+                <div class="product-card">
+
+                    <h3>
+                        {product[0]}
+                    </h3>
+                    <div class="title">
+                        <h3>
+                            {product[1]}
+                        </h3>
+                    </div>
+                    <div class="price">
+                        <h3>
+                            {product[2]}
+                        </h3>
+                    </div>
+                    <div class="link">
+                        <h3>
+                            {products[3]}
+                        </h3>
+                    </div>
+                </div>
+                {/each}
+            </div>
+        </div>
+    </main>
+
+    <!-- <footer>
+    <div class="footer">
+      <div class="categories">
+        <h3>Categories</h3>
+        <div class="categories-all">
+          <p>Bathroom</p>
+          <p>Building</p>
+          <p>Electrics</p>
+          <p>Furniture</p>
+          <p>Heating</p>
+          <p>Kitchen</p> 
+          <p>Outdoor</p>
+          <p>Paint</p>
+          <p>Plumbing</p>
+          <p>Tiling</p>
+          <p>Timber</p>
+          <p>Tools</p>
+        </div>
+      </div>
+      
+      <div class="mid-column">  
+          <section class="socials">
+            <div class="color"></div>
+            <div class="color"></div>
+            <div class="color"></div>
+            <ul>
+              <li><a href="/"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="/"><i class="fa-brands fa-twitter"></i></a></li>
+              <li><a href="/"><i class="fa-brands fa-tiktok"></i></a></li>
+              <li><a href="/"><i class="fa-brands fa-facebook-f"></i></a></li>
+            </ul>
+          </section>
+          
+        <div class="contact">
+          <h3>Contact</h3>
+          <div class="contact-methods">
+            <p>Contact us via email</p>
+            <p>Contact us via phone</p>
+  
+          <div class="address">
+            <p>Head Office: 3-9 Hyde Road, Manchester, M12 6BQ</p>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="details">
+        <h3>Details</h3>
+        <p>About Us</p>
+        <p>Privacy & Cookie Statement</p>
+        <p>Terms & Conditions</p>
+
+        <br>
+        <h4>Copyright</h4> 
+        <p>© Muhammed Choudhary</p>
+      </div>
+    </div>
+  </footer> -->
+</div>
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Raleway");
+    * {
+        /* outline: 1px solid green;  */
+    }
+    /* .container {
+    font-family: Raleway, sans-serif;
+    
+  }
+  main {
+    display: flex;
+    justify-content: center;
+    font-family: Raleway, sans-serif;
+    background: #cfd1e1;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  header {
+    position: sticky;
+    z-index: 100;
+  }
+  .header {
+    display: flex;
+    gap: 1rem;
+    height: 3.5rem;  
+    justify-content: space-between;
+    align-items: center;
+    background-color: #02585f;
+    padding: 0.5rem 2rem;
+    position: sticky;
+    z-index: 100;
+  }
+  
+  .footer {
+    position: relative;
+    background-color: #02585f;
+    padding: 1rem 1rem;
+    display: flex;
+    color: #ffcb00;
+    height: 20rem;
+    justify-content: space-around;
+    padding: 3rem;
+  }
+
+  .footer h3 {
+    font-size: 1.2rem;
+  }
+
+
+  .footer div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer div p {
+    margin: 0.5px;
+  }
+
+  .details h3, .categories h3, .contact h3 {
+    text-align: center;
+  }
+
+  .address {
+    margin-top: 20px;
+  }
+
+  .mid-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .contact {
+    margin-top: 7.5rem;
+  }
+  .socials {
+    margin-top: 1rem;
+    position: absolute;
+    width: 23.2rem;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #02585f, #02585f);
+  }
+
+  .socials::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 23.2rem;
+    height: 5vh;
+    z-index: 1;
+    backdrop-filter: blur(5px);
+  }
+
+  .socials ul {
+    position: relative;
+    display: flex;
+    z-index: 2;
+  }
+
+  .socials ul li {
+    position: relative;
+    list-style: none;
+    margin-right: 10px;
+    
+  }
+
+  .socials ul li a {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 2em;
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    transition: 0.5s;
+    overflow: hidden;
+  }
+
+  .socials ul li a i {
+    margin-top: 50%;
+    height: 100%;
+  }
+
+  .socials ul li a:hover {
+    transform: translateY(-20px);
+  }
+
+  .socials ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background-color: #ffcb00;
+    transform: skewX(45deg) translateX(150px);
+    transition: 0.5s;
+  }
+  
+  .socials ul li a:hover::before {
+    transform: skewX(45deg) translateX(-150px);
+  }
+
+  .fa-brands {
+    color: #ffcb00; 
+  }
+  .categories-all p {
+    display: flex;
+    flex-direction: column;
+  }
+  .logo {
+    color: #ffcb00;
+    font-weight: 900;
+  }
+
+  nav {
+    display: flex;
+  }
+
+  nav .header-link {
+    border-left: 1px solid black;
+    color: white;
+    border-left: 1px solid black; 
+  }
+
+  nav .header-link:last-child {
+    border-right: 1px solid black;
+  }
+  .header-link {
+    position: relative;
+    z-index: 0;
+    padding: 0.5rem 1rem;
+  }
+
+  .header-link::after {
+    content: '';
+    height: 0;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #ffcb00;
+    z-index: -1;
+    transition: 0.5s;
+  }
+
+  .header-link:hover {
+    font-weight: 600;
+    box-shadow: 0px 2px black;
+    color: black;
+  }
+
+  .header-link:hover::after {
+    height: 100%;
+  }
+
+  .login {
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+  }
+
+  .login:hover {
+    box-shadow: 1px 1px black;
+    color: black;
+  }
+  
+  h1,
+  h2 {
+    margin: 0.5rem;
+  }
+
+  .wrapper-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 1rem;
+    max-width: 50rem;
+    justify-content: center;
+  }
+
+  .logo {
+    align-items: baseline;
+    text-decoration: none;
+    font-size: 2rem;
+  } */
+    
+    .searchbox {
+        position: relative;
+        width: 65px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: 0.5s;
+        box-shadow: -5px -5px 10px 0px #ebecff, 5px 5px 10px 0px #a4a5b3;
+    }
+    
+    .searchbox:hover {
+        width: 400px;
+    }
+    
+    .searchbox input {
+        font-family: Raleway, sans-serif;
+        font-size: 1.25rem;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding: 0px 25px;
+        outline: none;
+        color: #555;
+        background-color: #cfd1e1;
+        padding-right: 50px;
+        box-shadow: inset -5px -5px 20px 0px #ebecff, inset 5px 5px 20px 0px #a4a5b3;
+    }
+    
+    .searchbox input::placeholder,
+    .searchbox input {
+        color: transparent;
+    }
+    
+    .searchbox:hover input::placeholder,
+    .searchbox:hover input {
+        color: #555;
+    }
+    
+    .fa-search {
+        z-index: 1000;
+        position: absolute;
+        color: #02585f;
+        font-size: 1.5em;
+        right: 20px;
+        cursor: pointer;
+    }
+    
+    .category-title {
+        font-size: 2rem;
+        margin-top: 2.5rem;
+        padding-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50rem;
+        border-bottom: 1px solid #abaca6;
+    }
+    
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .category-card {
+        display: flex;
+        margin-top: 3rem;
+        margin-left: 3rem;
+        margin-right: 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        width: 500px;
+        height: 275px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+        transition: 0.5s;
+    }
+    
+    .blank-card {
+        opacity: 0;
+    }
+    
+    .category-card .circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+    
+    .category-card .circle::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #02585f;
+        clip-path: circle(80px at center);
+        transition: 0.5s;
+    }
+    
+    .category-card:hover .circle::before {
+        clip-path: circle(400px at center);
+        background: #ffcb00;
+    }
+    
+    .category-card img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100px;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+    
+    .category-card img {
+        height: 100px;
+    }
+    
+    .paint-card img {
+        height: 80px;
+    }
+    
+    .timber-card img {
+        height: 65px;
+    }
+    
+    .kitchen-card img {
+        height: 130px;
+    }
+    
+    .heating-card img {
+        top: 45%;
+    }
+    
+    .category-card:hover img {
+        left: 80%;
+        height: 275px;
+    }
+    
+    .furniture-card:hover img {
+        left: 77%;
+        height: 275px;
+    }
+    
+    .timber-card:hover img {
+        left: 90%;
+        height: 160px;
+    }
+    
+    .plumbing-card:hover img {
+        left: 85%;
+        height: 300px;
+    }
+    
+    .paint-card:hover img,
+    .wiring-card:hover img {
+        left: 80%;
+        height: 225px;
+    }
+    
+    .kitchen-card:hover img {
+        left: 55%;
+        height: 320px;
+        transform: translateY(-55%);
+    }
+    
+    .tools-card:hover img {
+        left: 80%;
+        height: 285px;
+    }
+    
+    .furniture-card:hover img {
+        left: 87%;
+        height: 200px;
+    }
+    
+    .outdoor-card:hover img {
+        left: 80%;
+        height: 300px;
+    }
+    
+    .heating-card:hover img {
+        top: 50%;
+        left: 50%;
+        transform: translateY(-65%);
+    }
+    
+    .clearance-card:hover img {
+        left: 85%;
+    }
+    
+    .category-card:hover::after {
+        border-radius: 20px;
+    }
+    
+    .category-card .content {
+        position: relative;
+        width: 50%;
+        padding: 10px 10px 10px 20px;
+        transition: 0.5s;
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .category-card:hover .content {
+        left: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .category-card .content h2 {
+        text-transform: uppercase;
+        font-size: 2em;
+        line-height: 1em;
+        padding-bottom: 2.5rem;
+    }
+    
+    .category-card .content p {
+        transform: translateY(-30px);
+    }
+</style>
