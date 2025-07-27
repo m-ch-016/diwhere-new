@@ -9,25 +9,41 @@ def register(app):
 
     @admin.command('dbupdate')
     def dbupdate():    
-        with open('output.csv', 'r') as file:
-            reader = csv.reader(file)
-            count = 0
-            for row in reader:
-                product = Product(
-                    name=row[0],
-                    price=row[1],
-                    image=row[2],
-                    link=row[3],
-                    source=row[4]
-                )
+        db.session.rollback()
 
-                try:
-                    db.session.add(product)
-                    db.session.commit()
-                    count += 1
-                except Exception as exception:
-                    print(exception)
-                    print(product)
-                    print()
+        count = 0
 
-            print(count)
+        try:
+            with open('output.csv', 'r') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    link = row[3]
+                    try:
+                        existing = Product.query.filter_by(link=link).first()
+                        print(existing)
+                        if existing:
+                            print(f"Skipped duplicate product with link: {link}")
+                            continue
+
+                        product = Product(
+                            name=row[0],
+                            price=row[1],
+                            image=row[2],
+                            link=link,
+                            source=row[4]
+                        )
+
+                        db.session.add(product)
+                        db.session.commit()
+                        count += 1
+                        
+                    except IntegrityError as ie:
+                        db.session.rollback()
+
+                    except Exception as e:
+                        db.session.rollback()
+
+        except Exception as e:
+            db.session.rollback()
+
+        print(f'{count} products added')
