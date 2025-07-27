@@ -5,3 +5,4 @@ venv/
 .venv/
 static/
 output.csv
+node_modules/
