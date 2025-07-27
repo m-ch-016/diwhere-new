@@ -1,0 +1,7 @@
+__pycache__
+app.db 
+migrations/
+venv/
+.venv/
+static/
+output.csv
