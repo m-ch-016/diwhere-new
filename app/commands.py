@@ -1,6 +1,7 @@
 from app import db
 from app.models import Product
 import csv
+from sqlalchemy.exc import IntegrityError
 
 def register(app):
     @app.cli.group()
