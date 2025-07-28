@@ -1,4 +1,4 @@
-import urllib, math
+import urllib, math, re
 from typing import TypeAlias
 from requests_html import AsyncHTMLSession
 
@@ -26,6 +26,10 @@ async def retrieve(term: str, asession: AsyncHTMLSession) -> list[ProductRecord]
 
 
     productCount = res.html.find('.pagination-bar-results', first=True).text
+    
+    if ',' in productCount:
+        productCount = re.sub(',', '', productCount)
+        
     productCount = int(productCount.split()[0])
     pageCount = math.ceil(productCount / 48)
 

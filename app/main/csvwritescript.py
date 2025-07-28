@@ -1,6 +1,7 @@
 import csv
 import bnqretrieval, homebaseretrieval, screwfixretrieval, jewsonretrieval, wickesretrieval, woodiesretrieval, toolstationretrieval, victoriaplumretrieval
 from requests_html import AsyncHTMLSession
+import os
 
 
 asession = AsyncHTMLSession()
@@ -14,14 +15,14 @@ term = input('Enter term: ')
 
 
 results = asession.run(
-    lambda: bnqretrieval.retrieve(term, asession),
+    # lambda: bnqretrieval.retrieve(term, asession),
     lambda: homebaseretrieval.retrieve(term, asession),
-    lambda: jewsonretrieval.retrieve(term, asession),
-    lambda: wickesretrieval.retrieve(term, asession),
-    lambda: woodiesretrieval.retrieve(term, asession),
-    lambda: screwfixretrieval.retrieve(term, asession),
-    lambda: toolstationretrieval.retrieve(term, asession),
-    lambda: victoriaplumretrieval.retrieve(term, asession),
+    # lambda: jewsonretrieval.retrieve(term, asession),
+    # lambda: wickesretrieval.retrieve(term, asession),
+    # lambda: woodiesretrieval.retrieve(term, asession),
+    # lambda: screwfixretrieval.retrieve(term, asession),
+    # lambda: toolstationretrieval.retrieve(term, asession),
+    # lambda: victoriaplumretrieval.retrieve(term, asession),
 )
 
 
@@ -56,8 +57,10 @@ results = asession.run(
 
 # results = [f() for f in [(lambda: ('b', test(link))) for link in links]]
 
-print(results)
-with open('output.csv', 'w', newline='') as file:
+root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+output_path = os.path.join(root_dir, 'output.csv')
+
+with open('output.csv', 'a', encoding='utf-8', newline='') as file:
     writer = csv.writer(file)
     for set in results:
         writer.writerows(set)   

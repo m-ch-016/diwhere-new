@@ -9,19 +9,35 @@ async def retrieve(term: str, asession: AsyncHTMLSession) -> list[ProductRecord]
     link = urllib.parse.quote_plus(f'https://www.diy.com/search?term={term}', safe='/?=&:')
     print(f'bnq {link}: running retrieve')
 
-    res = await asession.get(link)
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+    }
+
+
+    res = await asession.get(link, headers=headers)
     # print(f'bnq {link}: got response')
-    await res.html.arender(timeout=5)
+    await res.html.arender(wait=10, sleep=2)
     # print(f'bnq {link}: rendered html')
     
-    productCount = res.html.find('[data-test-id=search-options-total-results]', first=True).text
+    print(res.html.html)
+    print(res.url)
+    productCount = res.html.find('.mr-lg.hidden.text-md.font-bold', first=True).text
     productCount = productCount.split()[0]
 
     if ',' in productCount:
         productCount = re.sub(',','',productCount)
 
     productCount = int(productCount)
-    pageCount = math.ceil(productCount / 24)
+    pageCount = math.ceil(productCount / 27)
 
     pageLinks = [
         f'{link}&page={page}'
