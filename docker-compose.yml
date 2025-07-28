@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - "C:/Users/muham/Documents/CODING/DIWhere/app.db:/app/app.db"
+    environment:
+      - FLASK_ENV=development
+      - SQLALCHEMY_DATABASE_URI=sqlite:////app/app.db
+    command: >
+      sh -c "python addtodb.py && python app.py"
