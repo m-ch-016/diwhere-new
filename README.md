@@ -1,30 +1,22 @@
-# DIWhere
+# diwhere.com
 
-## Introduction
+**diwhere.com** is a comparison search engine focused on major UK DIY retail products. It helps users quickly find and compare prices and availability across multiple retailers, making DIY shopping easier and more cost-effective.
 
-DIWhere is a search engine for comparing products and pricing from the UKs leading DIY suppliers.
+## Technology Stack
 
-## Setup
+- **Frontend:** Built with Svelte for a fast, reactive, and modern user interface.
+- **Backend:** Powered by Flask to handle API requests, data aggregation, and search logic.
 
-```
-flask db init && flask db migrate && flask db upgrade
-```
+## Features
 
-## Todo
+- Search and compare products from multiple UK DIY retailers in one place.
+- Real-time price and availability updates.
+- User-friendly and responsive design for seamless experience on any device.
 
-- turn webscraping and retrieval into a script
-- script should write to a CSV file all of the products that are found
+## How it works
 
-1. run script
-2. note the current time
-3. for each retrieved product, save that time as its retrieval time
-
-- id, name, link, image, source, retrievalTime
-- each product is a row in a CSV file generated from the webscraping
-
-
-## Authors
-
-Muhammed Chaudhary, Ibrahim Qasim
-
+1. Users enter a product search query in the frontend.
+2. The Svelte frontend sends requests to the Flask backend API.
+3. The backend scrapes or queries retailer data sources and aggregates results.
+4. Results are returned and displayed clearly for easy comparison.
 
